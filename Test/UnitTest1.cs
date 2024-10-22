@@ -8,7 +8,7 @@ namespace Test
         public void TestCarID()
         {
             // Arrange
-            var expected = true;
+            //var expected = true;
             var car = new Car(); // Ваш класс
 
             car.id = 1;
