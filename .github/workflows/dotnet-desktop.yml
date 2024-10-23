@@ -46,7 +46,7 @@ jobs:
   merge:
     runs-on: windows-latest
     needs: build
-    if: success() && github.event.action == 'opened' && github.head_ref == 'dev' && github.base_ref == 'main'
+    if: success() && github.event.action == 'opened' && github.head_ref == 'dev' && github.base_ref == 'master'
 
     steps:
     - name: Checkout code
