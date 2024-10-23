@@ -32,10 +32,10 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Generate XML Documentation
-        run: dotnet build --configuration Release /p:DocumentationFile=Doc.xml
+        run: dotnet build --configuration Release /p:DocumentationFile=docs/Doc.xml
 
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
         with:
           name: documentation
-          path: Doc.xml
+          path: docs/Doc.xml
