@@ -25,5 +25,11 @@ namespace CICD
                 return false;
             }
         }
+
+        public void SetCarName ()
+        {
+            Console.WriteLine("Enter new Name:");
+            this.name = Console.ReadLine();
+        }
     }
 }
