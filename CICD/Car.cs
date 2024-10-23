@@ -31,6 +31,7 @@ namespace CICD
             Console.WriteLine("Enter new Name:");
             this.name = Console.ReadLine();
             Console.WriteLine($"New name: {this.name}");
+
         }
     }
 }
