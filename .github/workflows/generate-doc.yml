@@ -1,0 +1,42 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - release
+  pull_request:
+    branches:
+      - main
+      - dev
+      - release
+
+jobs:
+  generate_docs:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.0.x'  # Укажите нужную версию .NET
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build the project
+        run: dotnet build --configuration Release
+
+      - name: Generate Documentation
+        run: dotnet build /p:DocumentationFile=G:\Practise2\CICD\CICD\bin\Debug\net7.0\Doc.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy Documentation (опционально)
+        run: |
+          cd docs
+          cp G:\Practise2\CICD\CICD\bin\Debug\net7.0\Doc.xml docs/  # Копируйте XML в папку docs
