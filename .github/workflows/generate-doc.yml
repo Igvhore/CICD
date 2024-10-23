@@ -32,11 +32,11 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Generate Documentation
-        run: dotnet build /p:DocumentationFile=G:\Practise2\CICD\CICD\bin\Debug\net7.0\Doc.xml
+        run: dotnet build /p:DocumentationFile=bin\Debug\net7.0\Doc.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy Documentation (опционально)
         run: |
           cd docs
-          cp G:\Practise2\CICD\CICD\bin\Debug\net7.0\Doc.xml docs/  # Копируйте XML в папку docs
+          cp bin\Debug\net7.0\Doc.xml docs/  # Копируйте XML в папку docs
