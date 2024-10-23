@@ -11,34 +11,31 @@ on:
       - main
       - dev
       - release
-
+      
 jobs:
-  generate_docs:
+  build:
     runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.0.x' 
+          dotnet-version: '7.0.0'
 
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build the project and generate documentation
-        run: |
-          mkdir -p docs
-          dotnet build --configuration Release /p:DocumentationFile=docs\Doc.xml
+      - name: Build project
+        run: dotnet build --configuration Release
 
-      - name: Verify Documentation
-        run: |
-          if (Test-Path -Path "docs\Doc.xml") {
-            Write-Host "Документ Doc.xml успешно сгенерирован."
-          } else {
-            Write-Host "Документ Doc.xml не был сгенерирован."
-            exit 1
-          }
-        shell: pwsh
+      - name: Generate XML Documentation
+        run: dotnet build --configuration Release /p:DocumentationFile=/Doc.xml
+
+      - name: Upload Documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation
+          path: /Doc.xml
