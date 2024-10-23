@@ -65,7 +65,7 @@ jobs:
 
   auto_merge:
     needs: [build, create_pr]
-    if: github.head_ref == 'dev' && github.base_ref == 'master'
+    if: github.ref == 'refs/heads/dev'
     runs-on: windows-latest
 
     steps:
