@@ -47,6 +47,7 @@ namespace CICD
 
         /// <summary>
         /// Это метод, который позволяет дать машине описание.
+        /// Дополнительное описание
         /// </summary>
 
         public void SetCarDescription(string description)
