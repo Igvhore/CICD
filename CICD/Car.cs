@@ -26,11 +26,16 @@ namespace CICD
             }
         }
 
-        public void SetCarName ()
-        {
-            Console.WriteLine("Enter new Name:");
-            this.name = Console.ReadLine();
+        public void SetCarName (string name)
+        { 
+            this.name = name;
             Console.WriteLine($"New name: {this.name}");
+        }
+
+        public void SetCarDescription(string description)
+        {
+            this.description = description;
+            Console.WriteLine($"New description: {this.description}");
         }
     }
 }

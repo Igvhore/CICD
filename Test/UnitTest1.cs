@@ -28,7 +28,24 @@ namespace Test
             //var expected = true;
             var car = new Car(); // Ваш класс
 
-            car.SetCarName();
+            car.SetCarName("BMW");
+            // Act
+            //var result = car.CheckID(); //тестиируемый метод
+
+            // Assert
+            //Assert.Equal(expected, result); // Для xUnit
+
+            // Assert.AreEqual(expected, result); // Для NUnit
+        }
+
+        [Fact]
+        public void TestSetDescriptionName()
+        {
+            // Arrange
+            //var expected = true;
+            var car = new Car(); // Ваш класс
+
+            car.SetCarDescription("Lol");
             // Act
             //var result = car.CheckID(); //тестиируемый метод
 
