@@ -52,7 +52,7 @@ jobs:
       
     - name: Create Pull Request
       id: create_pr 
-      uses: Igvhore/create-pull-request@v5 
+      uses: Igvhore/CICD@v5 
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: master 
