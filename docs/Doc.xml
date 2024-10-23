@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CICD</name>
+    </assembly>
+    <members>
+        <member name="T:CICD.Car">
+            <summary>
+            Это Класс для работы с Автомобилями
+            </summary>
+        </member>
+        <member name="M:CICD.Car.CheckID">
+            <summary>
+            Это метод, который выполняет сложение двух чисел.
+            </summary>
+            <param name="a">Первое число.</param>
+            <param name="b">Второе число.</param>
+            <returns>Сумма двух чисел.</returns>
+        </member>
+    </members>
+</doc>
