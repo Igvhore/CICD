@@ -43,6 +43,19 @@ jobs:
 
       - name: Execute unit tests
         run: dotnet test --configuration ${{ matrix.configuration }}
+    
+  create_document:
+     runs-on: windows-latest
+
+     steps:
+       - name: Generate XML Documentation
+         run: dotnet build --configuration Release /p:DocumentationFile=docs/Doc.xml
+
+       - name: Upload Documentation
+         uses: actions/upload-artifact@v4
+         with:
+           name: documentation
+           path: docs/Doc.xml    
 
   create_pr:
     needs: build
