@@ -43,6 +43,7 @@ namespace CICD
         { 
             this.name = name;
             Console.WriteLine($"New name: {this.name}");
+
         }
 
         /// <summary>
