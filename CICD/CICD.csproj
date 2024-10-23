@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <StartupObject>CICD.Program</StartupObject>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>Doc.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\Doc.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
