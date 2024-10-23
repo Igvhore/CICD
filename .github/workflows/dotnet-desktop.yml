@@ -64,9 +64,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  merge:
-    needs: build
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.head_ref == 'dev' && github.base_ref == 'master'
+  auto_merge:
+    needs: [build, create_pr]
+    if: github.event_name == 'pull_request' && github.event.action == 'synchronize' && github.head_ref == 'dev' && github.base_ref == 'master' && success()
     runs-on: windows-latest
 
     steps:
@@ -75,16 +75,13 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Set up Git
+    - name: Merge PR
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-    - name: Merge dev into master
-      run: |
         git fetch origin master
         git checkout master
-        git merge dev
+        git merge ${{ github.head_ref }} || echo "Merge conflict detected, please resolve manually."
         git push origin master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
