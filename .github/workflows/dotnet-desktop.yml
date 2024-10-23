@@ -64,15 +64,24 @@ jobs:
  
 
   auto_merge:
-    needs: [build, create_pr]
-    if: github.ref == 'refs/heads/dev'
-    runs-on: windows-latest
+   needs: [build, create_pr]
+   if: github.ref == 'refs/heads/dev'
+   runs-on: windows-latest
 
-    steps:
-    - name: Auto Merge PR
-      if: ${{ github.event.pull_request.merged == false }}
-      uses: Igvhore/action-auto-merge@v2.3.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        pull_request_number: ${{ github.event.pull_request.number }}
-        merge_method: merge
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v4
+       with:
+         fetch-depth: 0
+
+     - name: Auto Merge PR
+       run: |
+         git config --global user.name "github-actions[bot]"
+         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+         git fetch origin master
+         git checkout master
+         git merge ${{ github.head_ref }} || echo "Merge conflict detected, please resolve manually."
+         git push origin master
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHU
+
