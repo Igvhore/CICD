@@ -23,20 +23,22 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.0.x'  # Укажите нужную версию .NET
+          dotnet-version: '8.0.x' 
 
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build the project
-        run: dotnet build --configuration Release
-
-      - name: Generate Documentation
-        run: dotnet build /p:DocumentationFile=CICD\docs\Doc.xml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Deploy Documentation
+      - name: Build the project and generate documentation
         run: |
           mkdir -p docs
-          cp CICD\docs\Doc.xml docs/Doc.xml  # Копируйте XML в папку docs
+          dotnet build --configuration Release /p:DocumentationFile=docs\Doc.xml
+
+      - name: Verify Documentation
+        run: |
+          if (Test-Path -Path "docs\Doc.xml") {
+            Write-Host "Документ Doc.xml успешно сгенерирован."
+          } else {
+            Write-Host "Документ Doc.xml не был сгенерирован."
+            exit 1
+          }
+        shell: pwsh
