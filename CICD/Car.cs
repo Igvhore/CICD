@@ -38,5 +38,12 @@ namespace CICD
             Console.WriteLine($"New description: {this.description}");
         }
 
+        public Car()
+        {
+            this.id = 0;
+            this.name = "";
+            this.description = "";
+        }
+
     }
 }
