@@ -13,7 +13,6 @@ on:
 jobs:
 
   build:
-
     strategy:
       matrix:
         configuration: [Debug, Release]
@@ -21,67 +20,65 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: Build the project
-      run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
+      - name: Build the project
+        run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
 
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v2
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v2
 
-    - name: Execute unit tests
-      run: dotnet test --configuration ${{ matrix.configuration }}
+      - name: Execute unit tests
+        run: dotnet test --configuration ${{ matrix.configuration }}
 
   create_pr:
-   needs: build
-   if: github.ref == 'refs/heads/dev'
-   runs-on: windows-latest
+    needs: build
+    if: github.ref == 'refs/heads/dev'
+    runs-on: windows-latest
 
-   steps:
-     - name: Checkout code
-       uses: actions/checkout@v4
-       with:
-         fetch-depth: 0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-     - name: Create Pull Request
-       run: |
-         git config --global user.name "github-actions[bot]"
-         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-         gh pr create --base master --head dev --title "Merge dev into master" --body "Automated PR from dev to master"
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 
+      - name: Create Pull Request
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          gh pr create --base master --head dev --title "Merge dev into master" --body "Automated PR from dev to master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   auto_merge:
-   needs: [build, create_pr]
-   if: github.ref == 'refs/heads/dev'
-   runs-on: windows-latest
+    needs: [build, create_pr]
+    if: github.ref == 'refs/heads/dev'
+    runs-on: windows-latest
 
-   steps:
-     - name: Checkout code
-       uses: actions/checkout@v4
-       with:
-         fetch-depth: 0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-     - name: Auto Merge PR
-       run: |
-         git config --global user.name "github-actions[bot]"
-         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-         git fetch origin master
-         git checkout master
-         git merge ${{ github.head_ref }} || echo "Merge conflict detected, please resolve manually."
-         git push origin master
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHU
-
+      - name: Auto Merge PR
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git checkout master
+          git merge dev || echo "Merge conflict detected, please resolve manually."
+          git push origin master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
