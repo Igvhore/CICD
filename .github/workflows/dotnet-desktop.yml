@@ -43,6 +43,27 @@ jobs:
     - name: Execute unit tests
       run: dotnet test --configuration ${{ matrix.configuration }}
 
+  create_pr:
+    needs: build
+    if: github.ref == 'refs/heads/dev'
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Create Pull Request
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git checkout -b pr-from-dev
+        git push origin pr-from-dev
+        gh pr create --base master --head pr-from-dev --title "Merge dev into master" --body "Automated PR from dev to master"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   merge:
     needs: build
     if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.head_ref == 'dev' && github.base_ref == 'master'
