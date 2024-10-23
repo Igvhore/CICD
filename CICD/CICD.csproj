@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartupObject>CICD.Program</StartupObject>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\Debug\net7.0\Doc.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,3 +21,4 @@
   </ItemGroup>
 
 </Project>
+
