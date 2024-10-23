@@ -68,7 +68,7 @@ jobs:
     steps:
     - name: Auto Merge PR
       if: ${{ steps.create_pr.outputs.pull-request-url != '' }} 
-      uses: ahmadnassri/action-auto-merge@v2.3.0 
+      uses: Igvhore/action-auto-merge@v2.3.0 
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         pull_request_number: ${{ steps.create_pr.outputs.pull-request-number }} 
