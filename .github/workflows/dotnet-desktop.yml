@@ -42,7 +42,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Execute unit tests
-        run: dotnet test --configuration ${{ matrix.configuration }}
+        run: dotnet test --configuration ${{ matrix.configuration }} 
 
   create_pr:
     needs: build
@@ -84,3 +84,29 @@ jobs:
           git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  documentation:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install DocFX
+      run: |
+        choco install docfx -y
+
+    - name: Generate Documentation
+      run: |
+        docfx metadata docfx.json
+        docfx build docfx.json
+    - name: Deploy Documentation to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site
+        publish_branch: gh-pages
+
