@@ -42,7 +42,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Execute unit tests
-        run: dotnet test --configuration ${{ matrix.configuration }}
+        run: dotnet test --configuration ${{ matrix.configuration }} 
 
   create_pr:
     needs: build

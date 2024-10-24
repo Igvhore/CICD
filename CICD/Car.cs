@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace CICD
 {
+
     public class Car
     {
         public int id;
         public string name ="";
         public string description = "";
-
+ 
         public bool CheckID()
         {
             if (this.id <= 0)
@@ -26,11 +27,13 @@ namespace CICD
             }
         }
 
+
         public void SetCarName (string name)
         { 
             this.name = name;
             Console.WriteLine($"New name: {this.name}");
         }
+
 
         public void SetCarDescription(string description)
         {
