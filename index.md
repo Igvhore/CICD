@@ -2,4 +2,4 @@
 _layout: landing
 ---
 
-[API Documentation](api/CICD.html)
+[API Documentation](_site/api/CICD.html)
