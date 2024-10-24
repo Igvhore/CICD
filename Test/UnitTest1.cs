@@ -10,7 +10,7 @@ namespace Test
             // Arrange
             //var expected = true;
             var car = new Car(); // Ваш класс
-
+             
             car.id = 1;
             // Act
             var result = car.CheckID(); //тестиируемый метод
