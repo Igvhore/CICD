@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace CICD
 {
-    /// <summary>
-    /// Это Класс для работы с Автомобилями
-    /// </summary>
 
     public class Car
     {
         public int id;
         public string name ="";
         public string description = "";
-
-        /// <summary>
-        /// Это метод, который проверяет ID машины.
-        /// </summary>
  
         public bool CheckID()
         {
@@ -34,10 +27,6 @@ namespace CICD
             }
         }
 
-        /// <summary>
-        /// Это метод, который позволяет дать машине имя.
-        /// </summary>
-
 
         public void SetCarName (string name)
         { 
@@ -45,10 +34,6 @@ namespace CICD
             Console.WriteLine($"New name: {this.name}");
         }
 
-        /// <summary>
-        /// Это метод, который позволяет дать машине описание.
-        /// Дополнительное описание
-        /// </summary>
 
         public void SetCarDescription(string description)
         {

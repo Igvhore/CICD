@@ -6,8 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartupObject>CICD.Program</StartupObject>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>docs\Doc.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
