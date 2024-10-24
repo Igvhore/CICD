@@ -1,0 +1,10 @@
+{
+  "CICD": "CICD.yml",
+  "CICD.Car": "CICD.Car.yml",
+  "CICD.Car.CheckID": "CICD.Car.yml",
+  "CICD.Car.SetCarDescription(System.String)": "CICD.Car.yml",
+  "CICD.Car.SetCarName(System.String)": "CICD.Car.yml",
+  "CICD.Car.description": "CICD.Car.yml",
+  "CICD.Car.id": "CICD.Car.yml",
+  "CICD.Car.name": "CICD.Car.yml"
+}

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: CICD
+  commentId: N:CICD
+  id: CICD
+  children:
+  - CICD.Car
+  langs:
+  - csharp
+  - vb
+  name: CICD
+  nameWithType: CICD
+  fullName: CICD
+  type: Namespace
+  assemblies:
+  - CICD
+references:
+- uid: CICD.Car
+  commentId: T:CICD.Car
+  href: CICD.Car.html
+  name: Car
+  nameWithType: Car
+  fullName: CICD.Car
